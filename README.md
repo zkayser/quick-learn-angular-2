@@ -1,7 +1,7 @@
 # quick-learn-angular-2
 Building a flashcard system with Angular 2 for learning purposes
 
-This is app is a bit rough around the edges right now, but is essentially
+This app is a bit rough around the edges right now, but is essentially
 a flashcard system built solely in Angular 2. Data is being stored on an 
 mLabs MongoDB database. As it stands right now though, all of the business
 logic, data-storage logic and everything(!) is implemented on the front-end.

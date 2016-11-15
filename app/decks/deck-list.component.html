@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div *ngFor="let deck of decks" class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title" (click)="onSelect(deck)">{{deck.title}}</h3>
+      </div>
+      <div class="panel-body">
+        {{deck.description}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-primary btn-lg btn-block">New Deck</button>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<section>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="panel panel-info text-center" *ngIf="deck && initialMode">
+        <div class="panel-heading">
+          <h1 class="panel-title">
+            {{deck.title}}
+          </h1>
+        </div>
+        <div class="panel-body">
+          <br><br>
+          <h3>{{deck.description}}</h3>
+          <br><br>
+        </div>
+        <div class="btn-group btn-group-justified">
+          <a (click)="addCards()" class="btn btn-warning" style="white-space: normal;">Add Cards</a>
+          <a (click)="showCards()" class="btn btn-info" style="white-space: normal;">Show Cards</a>
+          <a (click)="onReviewProblems()" class="btn btn-success" style="white-space: normal;">Review Problems</a>
+          <a (click)="onReviewFlashcards()" class="btn btn-primary" style="white-space: normal;">Review Flashcards</a>
+        </div>
+        <div class="panel-body" *ngIf="addCardsMode">
+          <add-card [deck]="deck" (submitted)="onCardSubmitted($event)"></add-card>
+        </div>
+        <div *ngIf="showCardsMode">
+          <show-cards [deck]="deck"></show-cards>
+        </div>
+      </div>
+      <div *ngIf="reviewProblemsMode">
+        <problem-set-list [problemSets]="problemSets" [deck]="deck" (goBack)="hideProblemSets()"></problem-set-list>
+      </div>
+    </div>
+  </div>
+</section>

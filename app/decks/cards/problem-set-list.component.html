@@ -1,0 +1,40 @@
+<div *ngFor="let problemSet of problemSets; let i = index">
+  <div>
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">Problem Set {{i + 1}}</h3>
+      </div>
+      <div class="panel-body">
+        <span>
+          <h5 class="pull-left">
+            Status: 
+          </h5>
+          <h5 class="pull-right">
+            {{problemSet.status}}
+          </h5>
+        </span>
+        <br>
+        <br>
+        <span>
+          <h5 class="pull-left">
+            Completed: 
+          </h5>
+          <h5 class="pull-right">
+            {{completed(problemSet)}} / 10
+          </h5>
+        </span>
+        <br>
+        <br>
+        <div class="col-xs-offset-4">
+          <button class="btn btn-info" style="white-space: normal;" (click)="onTrain(i)" [disabled]="problemSet.status == 'Complete'">Train Problem Set</button>
+          <a class="btn btn-success" style="white-space: normal;" (click)="backToDeckOverview()">Go Back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="trainingMode && inTraining == problemSets[i]">
+    <problem-set-review [problemSet]="problemSet" [deck]="deck" (complete)="onComplete(problemSet)"></problem-set-review>
+  </div>
+  <br><br><br><br>
+</div>
+

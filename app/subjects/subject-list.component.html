@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div *ngFor="let subject of subjects" class="panel panel-primary">
+      <div class="panel-heading text-center">
+        <h3 class="panel-title" (click)="goToSubject(subject.id)">{{subject.title | uppercase}}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-primary btn-lg btn-block" (click)="onNewSubject()">New Subject</button>
+  </div>
+</div>

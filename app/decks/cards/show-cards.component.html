@@ -1,0 +1,74 @@
+<div *ngIf="cards" class="text-center">
+  <div *ngFor="let card of cards; let i = index">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <p [innerHtml]="card.front" [MathJax]="card.front"></p>
+      </div>
+      <div class="panel-body">
+        <p [innerHtml]="card.back" [MathJax]="card.back"></p> 
+        <div class="btn-group btn-group-justified">
+          <a (click)="onEdit(i)" class="btn btn-info">Edit</a>
+          <a (click)="onDelete(card)" class="btn btn-danger">Delete</a>
+        </div>
+        <div class="row" [ngStyle]="{'margin': '10px'}">
+          <div class="col-xs-6">
+            <span [ngStyle]="{'color': 'orange'}">Mastery Status:</span>
+          </div>
+          <div class="col-xs-6">
+            <div class="progress">
+              <div class="progress-bar progress-bar-success" [style.width.%]="percentMastered(card)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Edit Form -->
+      <div *ngIf="editMode && this.selectedIndex === i">
+        <form class="form-horizontal" (ngSubmit)="onSubmit()" #cardForm="ngForm">
+          <div class="form-group">
+            <div class="text-center">
+              <br>
+              <label for="front" class="col-lg-2 control-label"><h1>Front</h1></label>
+            </div>
+            <div class="col-lg-12">
+            <ckeditor [(ngModel)]="card.front"
+                      [config]="{uiColor: '#99000'}"
+                      name="front"
+                      debounce="500"
+                      [MathJax]="card.front">
+            </ckeditor>
+            </div>
+            <div class="text-center">
+              <label for="back" class="col-lg-2 control-label"><h1>Back</h1></label>
+            </div>
+            <div class="col-lg-12">
+              <ckeditor [(ngModel)]="card.back"
+                        [config]="{uiColor: '#99000'}"
+                        name="back"
+                        debounce="500"
+                        [MathJax]="card.back">
+                
+              </ckeditor>
+            </div>
+            <div>
+              <label>
+                <input [disabled]="card.isProblem"  type="checkbox" name="isFlashcard" [(ngModel)]="card.isFlashcard">
+                 Flashcard
+              </label>
+            </div>
+            <div>
+              <label>
+                <input [disabled]="card.isFlashcard" type="checkbox" name="isProblem" [(ngModel)]="card.isProblem">
+                Problem
+              </label>
+            </div>
+          </div>
+          <div class="btn-group btn-group-justified">
+            <a (click)="editCard(card, deck)" class="btn btn-success">Update Card</a>
+            <a (click)="onCancel()" class="btn btn-danger">Cancel</a>
+          </div>
+        </form>
+      </div>
+      <!-- End Edit Form -->
+    </div>
+  </div>
+</div>

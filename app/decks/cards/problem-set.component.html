@@ -1,0 +1,71 @@
+<!-- Modal -->
+<div class="modal fade text-center" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Answer</h4>
+      </div>
+      <div class="modal-body">
+        <h3 [innerHtml]="currentCard.back" [MathJax]="currentCard.back"></h3>
+        <hr>
+        <a class="btn btn-info" (click)="toggleAnswer()">Close</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="list-group text-center">
+  <a class="list-group-item">
+    <div class="inlay success-inlay" [@result]="resultState">
+      <div class="inlay-content">
+        <div *ngIf="resultState == 'success'">
+          <img src="../app/images/checkmark-outline.svg">
+        </div>
+        <div *ngIf="resultState == 'failure'">
+          <img src="../app/images/cancel-mark.svg">
+        </div>
+      </div>
+    </div>
+    <h4 class="list-group-item-heading">Training...</h4>
+    <h4 class="list-group-item-text">The Problem: </h4><hr>
+    <div class="list-group-item-text row">
+      <div class="col-xs-6">
+        <h4 class="pull-left">Progress: {{currentCard.repOfTen}} / 10</h4>
+      </div>
+      <div class="col-xs-6">
+        <div class="progress">
+          <div class="progress-bar progress-bar-success" [style.width.%]="((currentCard.repOfTen / 10) * 100)"></div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <h3 [innerHtml]="currentCard.front" [MathJax]="currentCard.front"></h3>
+    <hr>
+    <ckeditor [(ngModel)]="attempt"
+              [config]="{uiColor: '#99000'}"
+              name="attemp"
+              debounce="500"
+              [MathJax]="attempt"
+              *ngIf="showEditor">
+    </ckeditor>
+    <br>
+    <br>
+    <br>
+    <div class="btn-group btn-group-justified">
+      <a class="btn btn-success" style="white-space: normal;" (click)="onSuccess(currentCard)">I got this!</a>
+      <a class="btn btn-info" style="white-space: normal;" (click)="showAnswer()">Show answer</a>
+      <a class="btn btn-warning" style="white-space: normal;" (click)="toggleShowEditor()">{{toggleEditorBtnText}}</a>
+      <a class="btn btn-danger" style="white-space: normal;" (click)="onFailure(currentCard)">Try again</a>
+    </div>
+    <hr>
+    <h4 class="lead">Complete: {{numProblemsCompleted}} / {{numProblemsToCompletion}}</h4>
+    <div class="progress">
+      <div class="progress-bar progress-bar-info" [style.width.%]="percentComplete"></div>
+    </div>
+    <h4 class="lead">Percent Correct: {{numCorrect}} / {{numAttempts}}</h4>
+    <div class="progress">
+      <div class="progress-bar progress-bar-success" [style.width.%]="percentCorrect"></div>
+    </div>
+  </a>
+  
+</div>

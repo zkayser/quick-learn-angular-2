@@ -1,0 +1,44 @@
+<div>
+  <form class="form-horizontal" (ngSubmit)="onSubmit()" #cardForm="ngForm">
+    <div class="form-group">
+    <div class="text-center">
+      <br>
+      <label for="front" class="col-lg-12 text-center control-label"><h1>Front</h1></label>
+    </div>
+    <br>
+      <ckeditor [(ngModel)]="card.front"
+                [config]="{uiColor: '#99000'}"
+                name="front"
+                debounce="500"
+                [MathJax]="card.front">
+      </ckeditor>
+      <div class="text-center">
+        <label for="back" class="col-lg-12 text-center control-label"><h1>Back</h1></label>
+      </div>
+      <br>
+      <ckeditor [(ngModel)]="card.back"
+                [config]="{uiColor: '#99000'}"
+                name="back"
+                debounce="500"
+                [MathJax]="card.back">
+      </ckeditor>
+      <br>
+      <div>
+        <label>
+          <input [disabled]="card.isProblem"  type="checkbox" name="isFlashcard" [(ngModel)]="card.isFlashcard">
+           Flashcard
+        </label>
+      </div>
+      <div>
+        <label>
+          <input [disabled]="card.isFlashcard" type="checkbox" name="isProblem" [(ngModel)]="card.isProblem">
+          Problem
+        </label>
+      </div>
+    </div>
+    <div class="btn-group btn-group-justified">
+      <a (click)="submitCard(card, deck)" class="btn btn-success">Add Card</a>
+      <a href="#" class="btn btn-danger">Do Something Else</a>
+    </div>
+  </form>
+</div>
